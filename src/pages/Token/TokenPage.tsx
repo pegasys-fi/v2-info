@@ -167,7 +167,7 @@ export default function TokenPage({
 
   return (
     <PageWrapper>
-      <ThemedBackground backgroundColor={backgroundColor} />
+      <ThemedBackground />
       {tokenData ? (
         !tokenData.exists ? (
           <LightGreyCard style={{ textAlign: 'center' }}>

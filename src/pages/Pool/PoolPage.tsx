@@ -140,7 +140,7 @@ export default function PoolPage({
 
   return (
     <PageWrapper>
-      <ThemedBackground backgroundColor={backgroundColor} />
+      <ThemedBackground />
       {poolData ? (
         <AutoColumn gap="32px">
           <RowBetween>
