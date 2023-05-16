@@ -126,7 +126,7 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <ThemedBackgroundGlobal backgroundColor={activeNetwork.bgColor} />
+      <ThemedBackgroundGlobal />
       <AutoColumn gap="16px">
         <TYPE.main>Pegasys Overview</TYPE.main>
         <ResponsiveRow>

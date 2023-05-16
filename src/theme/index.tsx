@@ -85,6 +85,9 @@ export function colors(darkMode: boolean): Colors {
     blue1: '#2172E5',
     blue2: '#5199FF',
 
+    backgroundPegasys: darkMode ? '#010101' : '#e6faff',
+    background: `radial-gradient(50% 50% at 50% 50%, #56BED8  0%, ${darkMode ? '#010101' : '#e6faff'} 100%)`,
+
     // dont wanna forget these blue yet
     // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
@@ -225,7 +228,7 @@ html {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.text1};
-  background-color: ${({ theme }) => theme.bg1};
+  background-color: ${({ theme }) => theme.backgroundPegasys};
 }
 
 .three-line-legend-dark {
@@ -253,6 +256,7 @@ body {
   min-height: 100vh;
   background-position: 0 -30vh;
   background-repeat: no-repeat;
+  background-image: ${({ theme }) => theme.background} !important; 
 
 }
 `
