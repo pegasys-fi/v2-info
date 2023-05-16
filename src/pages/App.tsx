@@ -17,6 +17,7 @@ import { ExternalLink, TYPE } from 'theme'
 import { useActiveNetworkVersion, useSubgraphStatus } from 'state/application/hooks'
 import { DarkGreyCard } from 'components/Card'
 import { SUPPORTED_NETWORK_VERSIONS, EthereumNetworkInfo, OptimismNetworkInfo } from 'constants/networks'
+import { useIsDarkMode } from 'state/user/hooks'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -87,6 +88,7 @@ const BLOCK_DIFFERENCE_THRESHOLD = 30
 export default function App() {
   // pretend load buffer
   const [loading, setLoading] = useState(true)
+  const isDarkMode = useIsDarkMode()
   useEffect(() => {
     setTimeout(() => setLoading(false), 1300)
   }, [])
@@ -123,6 +125,19 @@ export default function App() {
         <LocalLoader fill={true} />
       ) : (
         <AppWrapper>
+          {isDarkMode ? (
+            <>
+              <div id="starsLightMode"></div>
+              <div id="starsLightMode2"></div>
+              <div id="starsLightMode3"></div>
+            </>
+          ) : (
+            <>
+              <div id="stars"></div>
+              <div id="stars2"></div>
+              <div id="stars3"></div>
+            </>
+          )}
           <URLWarning />
           <HeaderWrapper>
             {showNotSyncedWarning && (

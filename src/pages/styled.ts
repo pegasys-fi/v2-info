@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import '../theme/backgroundStars.css'
 
 export const PageWrapper = styled.div`
   width: 90%;
