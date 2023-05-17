@@ -6,7 +6,7 @@ import { ResponsiveRow, RowBetween, RowFixed } from 'components/Row'
 import LineChart from 'components/LineChart/alt'
 import useTheme from 'hooks/useTheme'
 import { useProtocolChartData, useProtocolData, useProtocolTransactions } from 'state/protocol/hooks'
-import { DarkGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity } from 'components/Card'
 import { formatDollarAmount } from 'utils/numbers'
 import Percent from 'components/Percent'
 import { HideMedium, HideSmall, StyledInternalLink } from '../../theme/components'
@@ -135,7 +135,7 @@ export default function Home() {
               data={formattedTvlData}
               height={220}
               minHeight={332}
-              color={activeNetwork.primaryColor}
+              color={theme.rainbowPegasysGradient}
               value={liquidityHover}
               label={leftLabel}
               setValue={setLiquidityHover}
@@ -164,7 +164,7 @@ export default function Home() {
                   ? weeklyVolumeData
                   : formattedVolumeData
               }
-              color={theme.blue1}
+              color={theme.primary1}
               setValue={setVolumeHover}
               setLabel={setRightLabel}
               value={volumeHover}
@@ -209,7 +209,7 @@ export default function Home() {
           </ChartWrapper>
         </ResponsiveRow>
         <HideSmall>
-          <DarkGreyCard>
+          <DarkGreyCardOpacity style={{ boxShadow: theme.deepShadow }}>
             <RowBetween>
               <RowFixed>
                 <RowFixed mr="20px">
@@ -232,7 +232,7 @@ export default function Home() {
                 </HideMedium>
               </RowFixed>
             </RowBetween>
-          </DarkGreyCard>
+          </DarkGreyCardOpacity>
         </HideSmall>
         <RowBetween>
           <TYPE.main>Top Tokens</TYPE.main>

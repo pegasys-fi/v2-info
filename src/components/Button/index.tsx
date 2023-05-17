@@ -40,22 +40,22 @@ const Base = styled(RebassButton)<{
 `
 
 export const ButtonPrimary = styled(Base)<{ bgColor?: string }>`
-  background-color: ${({ theme, bgColor }) => bgColor ?? theme.primary1};
-  color: white;
+  background-color: ${({ theme, bgColor }) => bgColor ?? theme.accentActionSoft};
+  color: ${({ theme }) => theme.primary1};
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.primary1)};
-    background-color: ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.primary1)};
+    box-shadow: 0 0 0 1pt ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.accentActionSoft)};
+    background-color: ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.accentActionSoft)};
   }
   &:hover {
-    background-color: ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.primary1)};
+    background-color: ${({ theme, bgColor }) => darken(0.05, bgColor ?? theme.accentActionSoft)};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme, bgColor }) => darken(0.1, bgColor ?? theme.primary1)};
-    background-color: ${({ theme, bgColor }) => darken(0.1, bgColor ?? theme.primary1)};
+    box-shadow: 0 0 0 1pt ${({ theme, bgColor }) => darken(0.1, bgColor ?? theme.accentActionSoft)};
+    background-color: ${({ theme, bgColor }) => darken(0.1, bgColor ?? theme.accentActionSoft)};
   }
   &:disabled {
     background-color: ${({ theme, altDisabledStyle, disabled }) =>
-      altDisabledStyle ? (disabled ? theme.bg3 : theme.primary1) : theme.bg3};
+      altDisabledStyle ? (disabled ? theme.bg3 : theme.accentActionSoft) : theme.bg3};
     color: ${({ theme, altDisabledStyle, disabled }) =>
       altDisabledStyle ? (disabled ? theme.text3 : 'white') : theme.text3};
     cursor: auto;
@@ -95,21 +95,21 @@ export const ButtonLight = styled(Base)`
 `
 
 export const ButtonGray = styled(Base)`
-  background-color: ${({ theme }) => theme.bg3};
+  background-color: ${({ theme }) => theme.accentActionSoft};
   color: ${({ theme }) => theme.text2};
   font-size: 16px;
   font-weight: 500;
   outline: none;
   &:focus {
-    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.bg4)};
+    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.accentActionSoft)};
     outline: none;
   }
   &:hover {
-    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.bg4)};
+    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.accentActionSoft)};
     outline: none;
   }
   &:active {
-    background-color: ${({ theme, disabled }) => !disabled && darken(0.1, theme.bg4)};
+    background-color: ${({ theme, disabled }) => !disabled && darken(0.1, theme.accentActionSoft)};
     outline: none;
   }
 `
@@ -185,9 +185,9 @@ export const ButtonUNIGradient = styled(ButtonPrimary)`
 `
 
 export const ButtonOutlined = styled(Base)`
-  border: 1px solid ${({ theme }) => theme.bg2};
+  border: 1px solid ${({ theme }) => theme.primary1};
   background-color: transparent;
-  color: ${({ theme }) => theme.text1};
+  color: ${({ theme }) => theme.primary1};
 
   &:focus {
     box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
@@ -407,7 +407,7 @@ export const SavedIcon = ({
   const theme = useTheme()
   return (
     <HoverIcon {...rest}>
-      <Star stroke={theme.text2} fill={fill ? theme.text2 : 'transparent'} size={size} />
+      <Star stroke={theme.yellow1} fill={fill ? theme.yellow1 : 'transparent'} size={size} />
     </HoverIcon>
   )
 }
@@ -418,8 +418,8 @@ export const SmallOptionButton = styled(Base)<{ active?: boolean }>`
   font-size: 12px;
   border-radius: 4px;
   min-width: 36px;
-  background-color: ${({ active, theme }) => (active ? theme.bg2 : theme.bg1)};
-  color: ${({ active, theme }) => (active ? theme.text1 : theme.text2)};
+  background-color: ${({ active, theme }) => (active ? theme.accentAction : theme.bg1)};
+  color: ${({ active, theme }) => (active ? theme.primary1 : theme.text2)};
 
   :hover {
     opacity: 0.6;

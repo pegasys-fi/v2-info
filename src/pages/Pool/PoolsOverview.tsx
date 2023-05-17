@@ -6,7 +6,7 @@ import PoolTable from 'components/pools/PoolTable'
 import { useAllPoolData, usePoolDatas } from 'state/pools/hooks'
 import { notEmpty } from 'utils'
 import { useSavedPools } from 'state/user/hooks'
-import { DarkGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity } from 'components/Card'
 // import TopPoolMovers from 'components/pools/TopPoolMovers'
 
 export default function PoolPage() {
@@ -32,9 +32,9 @@ export default function PoolPage() {
         {watchlistPools.length > 0 ? (
           <PoolTable poolDatas={watchlistPools} />
         ) : (
-          <DarkGreyCard>
+          <DarkGreyCardOpacity>
             <TYPE.main>Saved pools will appear here</TYPE.main>
-          </DarkGreyCard>
+          </DarkGreyCardOpacity>
         )}
         {/* <HideSmall>
           <DarkGreyCard style={{ paddingTop: '12px' }}>

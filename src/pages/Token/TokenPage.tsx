@@ -23,7 +23,7 @@ import CurrencyLogo from 'components/CurrencyLogo'
 import { formatDollarAmount } from 'utils/numbers'
 import Percent from 'components/Percent'
 import { ButtonPrimary, ButtonGray, SavedIcon } from 'components/Button'
-import { DarkGreyCard, LightGreyCard } from 'components/Card'
+import { DarkGreyCard, DarkGreyCardOpacity, LightGreyCard } from 'components/Card'
 import { usePoolDatas } from 'state/pools/hooks'
 import PoolTable from 'components/pools/PoolTable'
 import LineChart from 'components/LineChart/alt'
@@ -244,7 +244,7 @@ export default function TokenPage({
                       </ButtonGray>
                     </StyledExternalLink>
                     <StyledExternalLink href={`https://app.uniswap.org/#/swap?inputCurrency=${address}`}>
-                      <ButtonPrimary width="100px" bgColor={backgroundColor} style={{ height: '44px' }}>
+                      <ButtonPrimary width="100px" bgColor={theme.accentAction} style={{ height: '44px' }}>
                         Trade
                       </ButtonPrimary>
                     </StyledExternalLink>
@@ -253,7 +253,7 @@ export default function TokenPage({
               </ResponsiveRow>
             </AutoColumn>
             <ContentLayout>
-              <DarkGreyCard>
+              <DarkGreyCardOpacity>
                 <AutoColumn gap="lg">
                   <AutoColumn gap="4px">
                     <TYPE.main fontWeight={400}>TVL</TYPE.main>
@@ -274,8 +274,8 @@ export default function TokenPage({
                     <TYPE.label fontSize="24px">{formatDollarAmount(tokenData.feesUSD)}</TYPE.label>
                   </AutoColumn>
                 </AutoColumn>
-              </DarkGreyCard>
-              <DarkGreyCard>
+              </DarkGreyCardOpacity>
+              <DarkGreyCardOpacity>
                 <RowBetween align="flex-start">
                   <AutoColumn>
                     <RowFixed>
@@ -326,7 +326,7 @@ export default function TokenPage({
                 {view === ChartView.TVL ? (
                   <LineChart
                     data={formattedTvlData}
-                    color={backgroundColor}
+                    color={'transparent'}
                     minHeight={340}
                     value={latestValue}
                     label={valueLabel}
@@ -336,7 +336,7 @@ export default function TokenPage({
                 ) : view === ChartView.VOL ? (
                   <BarChart
                     data={formattedVolumeData}
-                    color={backgroundColor}
+                    color={'transparent'}
                     minHeight={340}
                     value={latestValue}
                     label={valueLabel}
@@ -349,7 +349,7 @@ export default function TokenPage({
                       data={adjustedToCurrent}
                       setValue={setLatestValue}
                       setLabel={setValueLabel}
-                      color={backgroundColor}
+                      color={'transparent'}
                     />
                   ) : (
                     <LocalLoader fill={false} />
@@ -384,20 +384,17 @@ export default function TokenPage({
                     </SmallOptionButton>
                   </AutoRow>
                 </RowBetween> */}
-              </DarkGreyCard>
+              </DarkGreyCardOpacity>
             </ContentLayout>
             <TYPE.main>Pools</TYPE.main>
-            <DarkGreyCard>
-              <PoolTable poolDatas={poolDatas} />
-            </DarkGreyCard>
+            <PoolTable poolDatas={poolDatas} />
+
             <TYPE.main>Transactions</TYPE.main>
-            <DarkGreyCard>
-              {transactions ? (
-                <TransactionTable transactions={transactions} color={backgroundColor} />
-              ) : (
-                <LocalLoader fill={false} />
-              )}
-            </DarkGreyCard>
+            {transactions ? (
+              <TransactionTable transactions={transactions} color={backgroundColor} />
+            ) : (
+              <LocalLoader fill={false} />
+            )}
           </AutoColumn>
         )
       ) : (

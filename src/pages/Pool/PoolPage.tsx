@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import styled from 'styled-components'
-import { useColor } from 'hooks/useColor'
 import { ThemedBackground, PageWrapper } from 'pages/styled'
 import { feeTierPercent, getEtherscanLink } from 'utils'
 import { AutoColumn } from 'components/Column'
@@ -15,7 +14,7 @@ import CurrencyLogo from 'components/CurrencyLogo'
 import { formatDollarAmount, formatAmount } from 'utils/numbers'
 import Percent from 'components/Percent'
 import { ButtonPrimary, ButtonGray, SavedIcon } from 'components/Button'
-import { DarkGreyCard, GreyCard, GreyBadge } from 'components/Card'
+import { GreyCard, GreyBadge, DarkGreyCardOpacity, GreyCardOpacity } from 'components/Card'
 import { usePoolDatas, usePoolChartData, usePoolTransactions } from 'state/pools/hooks'
 import { unixToDate } from 'utils/date'
 import { ToggleWrapper, ToggleElementFree } from 'components/Toggle/index'
@@ -84,8 +83,8 @@ export default function PoolPage({
   }, [])
 
   // theming
-  const backgroundColor = useColor()
   const theme = useTheme()
+  const backgroundColor = theme.primary1
 
   // token data
   const poolData = usePoolDatas([address])[0]
@@ -159,7 +158,7 @@ export default function PoolPage({
             <RowFixed gap="10px" align="center">
               <SavedIcon fill={savedPools.includes(address)} onClick={() => addSavedPool(address)} />
               <StyledExternalLink href={getEtherscanLink(1, address, 'address', activeNetwork)}>
-                <ExternalLink stroke={theme.text2} size={'17px'} style={{ marginLeft: '12px' }} />
+                <ExternalLink stroke={theme.primary1} size={'17px'} style={{ marginLeft: '12px' }} />
               </StyledExternalLink>
             </RowFixed>
           </RowBetween>
@@ -219,7 +218,7 @@ export default function PoolPage({
                 <StyledExternalLink
                   href={`https://app.uniswap.org/#/swap?inputCurrency=${poolData.token0.address}&outputCurrency=${poolData.token1.address}`}
                 >
-                  <ButtonPrimary width="100px" style={{ height: '44px' }}>
+                  <ButtonPrimary width="100px" bgColor={theme.accentAction} style={{ height: '44px' }}>
                     Trade
                   </ButtonPrimary>
                 </StyledExternalLink>
@@ -227,9 +226,9 @@ export default function PoolPage({
             )}
           </ResponsiveRow>
           <ContentLayout>
-            <DarkGreyCard>
+            <DarkGreyCardOpacity>
               <AutoColumn gap="lg">
-                <GreyCard padding="16px">
+                <GreyCardOpacity padding="16px">
                   <AutoColumn gap="md">
                     <TYPE.main>Total Tokens Locked</TYPE.main>
                     <RowBetween>
@@ -251,7 +250,7 @@ export default function PoolPage({
                       <TYPE.label fontSize="14px">{formatAmount(poolData.tvlToken1)}</TYPE.label>
                     </RowBetween>
                   </AutoColumn>
-                </GreyCard>
+                </GreyCardOpacity>
                 <AutoColumn gap="4px">
                   <TYPE.main fontWeight={400}>TVL</TYPE.main>
                   <TYPE.label fontSize="24px">{formatDollarAmount(poolData.tvlUSD)}</TYPE.label>
@@ -269,8 +268,8 @@ export default function PoolPage({
                   </TYPE.label>
                 </AutoColumn>
               </AutoColumn>
-            </DarkGreyCard>
-            <DarkGreyCard>
+            </DarkGreyCardOpacity>
+            <DarkGreyCardOpacity>
               <ToggleRow align="flex-start">
                 <AutoColumn>
                   <TYPE.label fontSize="24px" height="30px">
@@ -335,12 +334,10 @@ export default function PoolPage({
               ) : (
                 <DensityChart address={address} />
               )}
-            </DarkGreyCard>
+            </DarkGreyCardOpacity>
           </ContentLayout>
           <TYPE.main fontSize="24px">Transactions</TYPE.main>
-          <DarkGreyCard>
-            {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />}
-          </DarkGreyCard>
+          {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />}
         </AutoColumn>
       ) : (
         <Loader />
