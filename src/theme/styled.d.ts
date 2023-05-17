@@ -15,8 +15,10 @@ export interface Colors {
 
   // backgrounds / greys
   bg0: Color
+  bg0opacify: Color
   bg1: Color
   bg2: Color
+  bg2opacify: Color
   bg3: Color
   bg4: Color
   bg5: Color
@@ -52,6 +54,11 @@ export interface Colors {
 
   backgroundPegasys: Color
   background: Color
+  rainbowPegasysGradient: Color
+  deepShadow: Color
+  accentAction: Color
+  accentActionSoft: Color
+  accentActiveSoft: Color
 }
 
 export interface Grids {
