@@ -1,6 +1,8 @@
 import React from 'react'
-import v3 from '../../assets/images/whitev3.svg'
+import LoadingGifLight from '../../assets/images/lightLoading.gif'
+import LoadingGif from '../../assets/images/loading.gif'
 import styled, { keyframes, css } from 'styled-components'
+import { useIsDarkMode } from 'state/user/hooks'
 
 const rotate = keyframes`
   from {
@@ -77,10 +79,11 @@ const AnimatedImg = styled.div`
 `
 
 export const LocalLoader = ({ fill }: { fill: boolean }) => {
+  const isDarkMode = useIsDarkMode()
   return (
     <Wrapper fill={fill ? 1 : 0}>
       <AnimatedImg>
-        <img src={v3} alt="loading-icon" />
+        <img src={isDarkMode ? LoadingGif : LoadingGifLight} alt="loading-icon" />
       </AnimatedImg>
     </Wrapper>
   )
