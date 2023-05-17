@@ -8,6 +8,7 @@ import styled, {
 import { useIsDarkMode } from '../state/user/hooks'
 import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
+import { opacify } from 'utils/opacify'
 
 export * from './components'
 
@@ -47,9 +48,11 @@ export function colors(darkMode: boolean): Colors {
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
 
     // backgrounds / greys
-    bg0: darkMode ? '#191B1F' : '#F7F8FA',
+    bg0: darkMode ? '#081120' : '#EDF2F7',
+    bg0opacify: opacify(72, darkMode ? '#081120' : '#EDF2F7'),
     bg1: darkMode ? '#1F2128' : '#FFFFFF',
-    bg2: darkMode ? '#2C2F36' : '#F7F8FA',
+    bg2: darkMode ? '#0B172C' : '#EDF2F7',
+    bg2opacify: opacify(72, darkMode ? '#0B172C' : '#EDF2F7'),
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
     bg5: darkMode ? '#6C7284' : '#888D9B',
@@ -59,22 +62,22 @@ export function colors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#2172E5' : '#ff007a',
+    primary1: darkMode ? '#00D9EF' : '#665EE1',
     primary2: darkMode ? '#3680E7' : '#FF8CC3',
     primary3: darkMode ? '#4D8FEA' : '#FF99C9',
     primary4: darkMode ? '#376bad70' : '#F6DDE8',
     primary5: darkMode ? '#153d6f70' : '#FDEAF1',
 
     // color text
-    primaryText1: darkMode ? '#6da8ff' : '#ff007a',
+    primaryText1: darkMode ? '#6da8ff' : '#665EE1',
 
     // secondary colors
-    secondary1: darkMode ? '#2172E5' : '#ff007a',
+    secondary1: darkMode ? '#00D9EF' : '#665EE1',
     secondary2: darkMode ? '#17000b26' : '#F6DDE8',
     secondary3: darkMode ? '#17000b26' : '#FDEAF1',
 
     // other
-    pink1: '#ff007a',
+    pink1: '#665EE1',
     red1: '#FD4040',
     red2: '#F82D3A',
     red3: '#D60000',
@@ -87,6 +90,11 @@ export function colors(darkMode: boolean): Colors {
 
     backgroundPegasys: darkMode ? '#010101' : '#e6faff',
     background: `radial-gradient(50% 50% at 50% 50%, #56BED8  0%, ${darkMode ? '#010101' : '#e6faff'} 100%)`,
+    rainbowPegasysGradient: 'linear-gradient(90deg, #19EBCE 0%, #8A15E6 84.28%)',
+    deepShadow: `0px 10px 24px ${opacify(24, '#00D9EF')}, 10px 0px 24px ${opacify(24, '#8C15E8')}`,
+    accentAction: darkMode ? '#153D6F' : '#665EE1',
+    accentActionSoft: opacify(24, darkMode ? '#153D6F' : '#665EE1'),
+    accentActiveSoft: opacify(24, darkMode ? '#00D9EF' : '#665EE1'),
 
     // dont wanna forget these blue yet
     // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
