@@ -2,7 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
 import styled from 'styled-components'
-import LogoDark from '../../assets/svg/logo_white.svg'
+import LogoDark from '../../assets/images/pegasys.png'
+import Logo from '../../assets/images/LightPegasysLogo.png'
 import Menu from '../Menu'
 import Row, { RowFixed, RowBetween } from '../Row'
 import SearchSmall from 'components/Search'
@@ -10,6 +11,7 @@ import NetworkDropdown from 'components/Menu/NetworkDropdown'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
 import { AutoColumn } from 'components/Column'
+import useTheme from 'hooks/useTheme'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -21,12 +23,11 @@ const HeaderFrame = styled.div`
   width: 100%;
   top: 0;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   padding: 1rem;
   z-index: 2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-
-  background-color: ${({ theme }) => theme.bg0};
+  background-color: ${({ theme }) => theme.bg0opacifyLight};
 
   @media (max-width: 1080px) {
     grid-template-columns: 1fr;
@@ -93,7 +94,7 @@ const StyledNavLink = styled(NavLink).attrs({
 })`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
-  border-radius: 3rem;
+  border-radius: 4rem;
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -105,8 +106,8 @@ const StyledNavLink = styled(NavLink).attrs({
   font-weight: 500;
 
   &.${activeClassName} {
-    border-radius: 12px;
-    background-color: ${({ theme }) => theme.bg2};
+    border-radius: 30px;
+    background-color: ${({ theme }) => theme.bg0};
     color: ${({ theme }) => theme.text1};
   }
 
@@ -156,13 +157,14 @@ const SmallContentGrouping = styled.div`
 
 export default function Header() {
   const [activeNewtork] = useActiveNetworkVersion()
+  const theme = useTheme()
 
   return (
     <HeaderFrame>
       <HeaderRow>
         <Title to={networkPrefix(activeNewtork)}>
           <UniIcon>
-            <img width={'24px'} src={LogoDark} alt="logo" />
+            <img width={'36px'} src={theme ? LogoDark : Logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>

@@ -22,7 +22,7 @@ const StyledMenuButton = styled.button`
   margin: 0;
   padding: 0;
   height: 35px;
-  background-color: ${({ theme }) => theme.bg3};
+  background-color: ${({ theme }) => theme.bg2};
 
   padding: 0.15rem 0.5rem;
   border-radius: 0.5rem;
@@ -31,7 +31,7 @@ const StyledMenuButton = styled.button`
   :focus {
     cursor: pointer;
     outline: none;
-    background-color: ${({ theme }) => theme.bg4};
+    background-color: ${({ theme }) => theme.bg2opacify};
   }
 
   svg {
@@ -51,9 +51,8 @@ const StyledMenu = styled.div`
 
 const MenuFlyout = styled.span`
   min-width: 8.125rem;
-  background-color: ${({ theme }) => theme.bg3};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-    0px 24px 32px rgba(0, 0, 0, 0.01);
+  background-color: ${({ theme }) => theme.bg0};
+  box-shadow: ${({ theme }) => theme.deepShadow};
   border-radius: 12px;
   padding: 0.5rem;
   display: flex;
@@ -80,7 +79,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/Uniswap/uniswap-v3-info'
+const CODE_LINK = 'https://github.com/pegasys-fi'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
@@ -97,11 +96,11 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://uniswap.org/">
+          <MenuItem id="link" href="https://pegasys.finance/">
             <Info size={14} />
             About
           </MenuItem>
-          <MenuItem id="link" href="https://docs.uniswap.org/">
+          <MenuItem id="link" href="https://docs.pegasys.finance/">
             <BookOpen size={14} />
             Docs
           </MenuItem>
@@ -109,7 +108,7 @@ export default function Menu() {
             <Code size={14} />
             Github
           </MenuItem>
-          <MenuItem id="link" href="https://discord.gg/FCfyBSbCU5">
+          <MenuItem id="link" href="https://discord.com/invite/UzjWbWWERz">
             <MessageCircle size={14} />
             Discord
           </MenuItem>

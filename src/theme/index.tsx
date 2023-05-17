@@ -50,6 +50,7 @@ export function colors(darkMode: boolean): Colors {
     // backgrounds / greys
     bg0: darkMode ? '#081120' : '#EDF2F7',
     bg0opacify: opacify(72, darkMode ? '#081120' : '#EDF2F7'),
+    bg0opacifyLight: opacify(16, darkMode ? '#081120' : '#EDF2F7'),
     bg1: darkMode ? '#1F2128' : '#FFFFFF',
     bg2: darkMode ? '#0B172C' : '#EDF2F7',
     bg2opacify: opacify(72, darkMode ? '#0B172C' : '#EDF2F7'),
