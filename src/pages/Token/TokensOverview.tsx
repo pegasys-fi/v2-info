@@ -6,7 +6,7 @@ import TokenTable from 'components/tokens/TokenTable'
 import { useAllTokenData, useTokenDatas } from 'state/tokens/hooks'
 import { notEmpty } from 'utils'
 import { useSavedTokens } from 'state/user/hooks'
-import { DarkGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity } from 'components/Card'
 import TopTokenMovers from 'components/tokens/TopTokenMovers'
 
 export default function TokensOverview() {
@@ -32,17 +32,17 @@ export default function TokensOverview() {
         {savedTokens.length > 0 ? (
           <TokenTable tokenDatas={watchListTokens} />
         ) : (
-          <DarkGreyCard>
+          <DarkGreyCardOpacity>
             <TYPE.main>Saved tokens will appear here</TYPE.main>
-          </DarkGreyCard>
+          </DarkGreyCardOpacity>
         )}
         <HideSmall>
-          <DarkGreyCard style={{ paddingTop: '12px' }}>
+          <DarkGreyCardOpacity style={{ paddingTop: '12px' }}>
             <AutoColumn gap="md">
               <TYPE.mediumHeader fontSize="16px">Top Movers</TYPE.mediumHeader>
               <TopTokenMovers />
             </AutoColumn>
-          </DarkGreyCard>
+          </DarkGreyCardOpacity>
         </HideSmall>
         <TYPE.main>All Tokens</TYPE.main>
         <TokenTable tokenDatas={formattedTokens} />

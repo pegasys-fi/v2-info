@@ -2,7 +2,7 @@ import React, { useCallback, useState, useMemo, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { TYPE } from 'theme'
-import { DarkGreyCard, GreyBadge } from 'components/Card'
+import { DarkGreyCard, DarkGreyCardOpacity, GreyBadge } from 'components/Card'
 import Loader, { LoadingRows } from 'components/Loader'
 import { AutoColumn } from 'components/Column'
 import { RowFixed } from 'components/Row'
@@ -17,8 +17,9 @@ import useTheme from 'hooks/useTheme'
 import { networkPrefix } from 'utils/networkPrefix'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 
-const Wrapper = styled(DarkGreyCard)`
+const Wrapper = styled(DarkGreyCardOpacity)`
   width: 100%;
+  box-shadow: ${({ theme }) => theme.deepShadow};
 `
 
 const ResponsiveGrid = styled.div`

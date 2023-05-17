@@ -286,7 +286,7 @@ export default function DensityChart({ address }: DensityChartProps) {
             <XAxis reversed={true} tick={false} />
             <Bar
               dataKey="activeLiquidity"
-              fill="#2172E5"
+              fill={theme.primary1}
               isAnimationActive={false}
               shape={(props) => {
                 // eslint-disable-next-line react/prop-types
@@ -294,7 +294,7 @@ export default function DensityChart({ address }: DensityChartProps) {
               }}
             >
               {zoomedData?.map((entry, index) => {
-                return <Cell key={`cell-${index}`} fill={entry.isCurrent ? theme.pink1 : theme.blue1} />
+                return <Cell key={`cell-${index}`} fill={entry.isCurrent ? theme.pink1 : theme.primary1} />
               })}
               <LabelList
                 dataKey="activeLiquidity"

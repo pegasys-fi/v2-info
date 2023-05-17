@@ -21,11 +21,17 @@ export const LightGreyCard = styled(Card)`
 `
 
 export const GreyCard = styled(Card)`
-  background-color: ${({ theme }) => theme.bg2};
+  background-color: ${({ theme }) => theme.bg2opacify};
+`
+export const GreyCardOpacity = styled(Card)`
+  background-color: ${({ theme }) => theme.bg2opacify};
 `
 
 export const DarkGreyCard = styled(Card)`
   background-color: ${({ theme }) => theme.bg0};
+`
+export const DarkGreyCardOpacity = styled(Card)`
+  background-color: ${({ theme }) => theme.bg0opacify};
 `
 
 export const OutlineCard = styled(Card)`
@@ -67,7 +73,7 @@ export const ScrollableX = styled.div`
 export const GreyBadge = styled(Card)`
   width: fit-content;
   border-radius: 8px;
-  background: ${({ theme }) => theme.bg3};
+  background: ${({ theme }) => theme.accentActiveSoft};
   color: ${({ theme }) => theme.text1};
   padding: 4px 6px;
   font-weight: 400;

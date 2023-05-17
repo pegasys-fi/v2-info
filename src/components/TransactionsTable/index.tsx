@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo, useEffect } from 'react'
 import styled from 'styled-components'
-import { DarkGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity } from 'components/Card'
 import Loader from 'components/Loader'
 import { AutoColumn } from 'components/Column'
 import { formatDollarAmount, formatAmount } from 'utils/numbers'
@@ -16,8 +16,9 @@ import HoverInlineText from 'components/HoverInlineText'
 import { useActiveNetworkVersion } from 'state/application/hooks'
 import { OptimismNetworkInfo } from 'constants/networks'
 
-const Wrapper = styled(DarkGreyCard)`
+const Wrapper = styled(DarkGreyCardOpacity)`
   width: 100%;
+  box-shadow: ${({ theme }) => theme.deepShadow};
 `
 
 const ResponsiveGrid = styled.div`
@@ -87,7 +88,7 @@ const SORT_FIELD = {
   amountToken1: 'amountToken1',
 }
 
-const DataRow = ({ transaction, color }: { transaction: Transaction; color?: string }) => {
+const DataRow = ({ transaction }: { transaction: Transaction }) => {
   const abs0 = Math.abs(transaction.amountToken0)
   const abs1 = Math.abs(transaction.amountToken1)
   const outputTokenSymbol = transaction.amountToken0 < 0 ? transaction.token0Symbol : transaction.token1Symbol
@@ -98,7 +99,7 @@ const DataRow = ({ transaction, color }: { transaction: Transaction; color?: str
   return (
     <ResponsiveGrid>
       <ExternalLink href={getEtherscanLink(1, transaction.hash, 'transaction', activeNetwork)}>
-        <Label color={color ?? theme.blue1} fontWeight={400}>
+        <Label color={theme.primary1} fontWeight={400}>
           {transaction.type === TransactionType.MINT
             ? `Add ${transaction.token0Symbol} and ${transaction.token1Symbol}`
             : transaction.type === TransactionType.SWAP
@@ -118,7 +119,7 @@ const DataRow = ({ transaction, color }: { transaction: Transaction; color?: str
       <Label end={1} fontWeight={400}>
         <ExternalLink
           href={getEtherscanLink(1, transaction.sender, 'address', activeNetwork)}
-          style={{ color: color ?? theme.blue1 }}
+          style={{ color: theme.primary1 }}
         >
           {shortenAddress(transaction.sender)}
         </ExternalLink>
@@ -260,7 +261,7 @@ export default function TransactionTable({
           if (t) {
             return (
               <React.Fragment key={i}>
-                <DataRow transaction={t} color={color} />
+                <DataRow transaction={t} />
                 <Break />
               </React.Fragment>
             )

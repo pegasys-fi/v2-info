@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAllTokenData } from 'state/tokens/hooks'
-import { GreyCard } from 'components/Card'
+import { GreyCardOpacity } from 'components/Card'
 import { TokenData } from 'state/tokens/reducer'
 import { AutoColumn } from 'components/Column'
 import { RowFixed, RowFlat } from 'components/Row'
@@ -38,7 +38,7 @@ export const ScrollableRow = styled.div`
 const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
   return (
     <CardWrapper to={'tokens/' + tokenData.address}>
-      <GreyCard padding="16px">
+      <GreyCardOpacity padding="16px">
         <RowFixed>
           <CurrencyLogo address={tokenData.address} size="32px" />
           <AutoColumn gap="3px" style={{ marginLeft: '12px' }}>
@@ -53,7 +53,7 @@ const DataCard = ({ tokenData }: { tokenData: TokenData }) => {
             </RowFlat>
           </AutoColumn>
         </RowFixed>
-      </GreyCard>
+      </GreyCardOpacity>
     </CardWrapper>
   )
 }

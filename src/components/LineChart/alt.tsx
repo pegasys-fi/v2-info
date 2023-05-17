@@ -1,25 +1,24 @@
 import React, { Dispatch, SetStateAction, ReactNode } from 'react'
 import { ResponsiveContainer, XAxis, Tooltip, AreaChart, Area } from 'recharts'
 import styled from 'styled-components'
-import Card from 'components/Card'
+import { DarkGreyCardOpacity } from 'components/Card'
 import { RowBetween } from 'components/Row'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import useTheme from 'hooks/useTheme'
-import { darken } from 'polished'
 import { LoadingRows } from 'components/Loader'
 dayjs.extend(utc)
 
 const DEFAULT_HEIGHT = 300
 
-const Wrapper = styled(Card)`
+const Wrapper = styled(DarkGreyCardOpacity)`
   width: 100%;
   height: ${DEFAULT_HEIGHT}px;
   padding: 1rem;
   padding-right: 2rem;
   display: flex;
-  background-color: ${({ theme }) => theme.bg0};
   flex-direction: column;
+  box-shadow: ${({ theme }) => theme.deepShadow};
   > * {
     font-size: 1rem;
   }
@@ -87,9 +86,9 @@ const Chart = ({
             }}
           >
             <defs>
-              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={darken(0.36, color)} stopOpacity={0.5} />
-                <stop offset="100%" stopColor={color} stopOpacity={0} />
+              <linearGradient id="gradient" gradientTransform="rotate(90)">
+                <stop offset="10%" stopColor="rgba(25, 235, 206, 1)" />
+                <stop offset="84.28%" stopColor="rgba(138, 21, 230, 1)" />
               </linearGradient>
             </defs>
             <XAxis

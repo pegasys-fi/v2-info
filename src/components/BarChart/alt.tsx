@@ -1,25 +1,25 @@
 import React, { Dispatch, SetStateAction, ReactNode } from 'react'
 import { BarChart, ResponsiveContainer, XAxis, Tooltip, Bar } from 'recharts'
 import styled from 'styled-components'
-import Card from 'components/Card'
 import { RowBetween } from 'components/Row'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import useTheme from 'hooks/useTheme'
 import { VolumeWindow } from 'types'
 import { LoadingRows } from 'components/Loader'
+import { DarkGreyCardOpacity } from 'components/Card'
 dayjs.extend(utc)
 
 const DEFAULT_HEIGHT = 300
 
-const Wrapper = styled(Card)`
+const Wrapper = styled(DarkGreyCardOpacity)`
   width: 100%;
   height: ${DEFAULT_HEIGHT}px;
   padding: 1rem;
   padding-right: 2rem;
   display: flex;
-  background-color: ${({ theme }) => theme.bg0};
   flex-direction: column;
+  box-shadow: ${({ theme }) => theme.deepShadow};
   > * {
     font-size: 1rem;
   }
