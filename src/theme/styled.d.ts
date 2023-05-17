@@ -16,6 +16,7 @@ export interface Colors {
   // backgrounds / greys
   bg0: Color
   bg0opacify: Color
+  bg0opacifyLight: Color
   bg1: Color
   bg2: Color
   bg2opacify: Color

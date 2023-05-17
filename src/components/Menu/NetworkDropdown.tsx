@@ -17,7 +17,6 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   border-radius: 12px;
-  background-color: ${({ theme }) => theme.bg1};
   padding: 6px 8px;
   margin-right: 12px;
 
@@ -41,7 +40,8 @@ const LogoWrapper = styled.img`
 `
 
 const FlyOut = styled.div`
-  background-color: ${({ theme }) => theme.bg1};
+  background-color: ${({ theme }) => theme.bg0};
+  box-shadow: ${({ theme }) => theme.deepShadow};
   position: absolute;
   top: 40px;
   left: 0;
@@ -52,7 +52,7 @@ const FlyOut = styled.div`
 
 const NetworkRow = styled(RowBetween)<{ active?: boolean; disabled?: boolean }>`
   padding: 6px 8px;
-  background-color: ${({ theme, active }) => (active ? theme.bg2 : theme.bg1)};
+  background-color: ${({ theme, active }) => (active ? theme.bg2 : theme.bg0)};
   border-radius: 8px;
   opacity: ${({ disabled }) => (disabled ? '0.5' : 1)};
   :hover {
