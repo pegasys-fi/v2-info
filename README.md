@@ -1,8 +1,8 @@
-## Uniswap Info V3
+## Pegasys Info V2
 
-An open sourced interface for Uniswap V3 analytics.
+An open sourced interface for Pegasys V2 analytics.
 
-Info URL: https://info.uniswap.org/#/
+Info URL: https://info.pegasys.fi/#/
 
 ## Development
 
