@@ -5,24 +5,15 @@ import Logo from '../Logo'
 import { useCombinedActiveList } from 'state/lists/hooks'
 import useHttpLocations from 'hooks/useHttpLocations'
 import { useActiveNetworkVersion } from 'state/application/hooks'
-import { OptimismNetworkInfo } from 'constants/networks'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import { SupportedChainId } from '@uniswap/sdk-core'
+import { SupportedChainId } from '@pollum-io/sdk-core'
 
 export function chainIdToNetworkName(networkId: SupportedChainId) {
   switch (networkId) {
-    case SupportedChainId.MAINNET:
-      return 'ethereum'
-    case SupportedChainId.ARBITRUM_ONE:
-      return 'arbitrum'
-    case SupportedChainId.OPTIMISM:
-      return 'optimism'
-    case SupportedChainId.POLYGON:
-      return 'polygon'
-    case SupportedChainId.BNB:
-      return 'smartchain'
+    case SupportedChainId.ROLLUX:
+      return 'rollux'
     default:
-      return 'ethereum'
+      return 'rollux'
   }
 }
 
@@ -58,56 +49,9 @@ export default function CurrencyLogo({
   size?: string
   style?: React.CSSProperties
 }) {
-  // useOptimismList()
-  const optimismList = useCombinedActiveList()?.[10]
-  const arbitrumList = useCombinedActiveList()?.[42161]
-  const polygon = useCombinedActiveList()?.[137]
-  const celo = useCombinedActiveList()?.[42220]
-  const bnbList = useCombinedActiveList()?.[SupportedChainId.BNB]
-
   const [activeNetwork] = useActiveNetworkVersion()
 
   const checkSummed = isAddress(address)
-
-  const optimismURI = useMemo(() => {
-    if (checkSummed && optimismList?.[checkSummed]) {
-      return optimismList?.[checkSummed].token.logoURI
-    }
-    return undefined
-  }, [checkSummed, optimismList])
-  const uriLocationsOptimism = useHttpLocations(optimismURI)
-
-  const arbitrumURI = useMemo(() => {
-    if (checkSummed && arbitrumList?.[checkSummed]) {
-      return arbitrumList?.[checkSummed].token.logoURI
-    }
-    return undefined
-  }, [checkSummed, arbitrumList])
-  const uriLocationsArbitrum = useHttpLocations(arbitrumURI)
-
-  const BNBURI = useMemo(() => {
-    if (checkSummed && bnbList?.[checkSummed]) {
-      return bnbList?.[checkSummed].token.logoURI
-    }
-    return undefined
-  }, [checkSummed, bnbList])
-  const uriLocationsBNB = useHttpLocations(BNBURI)
-
-  const polygonURI = useMemo(() => {
-    if (checkSummed && polygon?.[checkSummed]) {
-      return polygon?.[checkSummed].token.logoURI
-    }
-    return undefined
-  }, [checkSummed, polygon])
-  const uriLocationsPolygon = useHttpLocations(polygonURI)
-
-  const celoURI = useMemo(() => {
-    if (checkSummed && celo?.[checkSummed]) {
-      return celo?.[checkSummed].token.logoURI
-    }
-    return undefined
-  }, [checkSummed, celo])
-  const uriLocationsCelo = useHttpLocations(celoURI)
 
   //temp until token logo issue merged
   const tempSources: { [address: string]: string } = useMemo(() => {
@@ -122,31 +66,10 @@ export default function CurrencyLogo({
 
     if (checkSummed && address) {
       const override = tempSources[address]
-      return [
-        getTokenLogoURL({ address: checkSummed, chainId: activeNetwork.chainId }),
-        ...uriLocationsOptimism,
-        ...uriLocationsArbitrum,
-        ...uriLocationsPolygon,
-        ...uriLocationsCelo,
-        ...uriLocationsBNB,
-        override,
-      ]
+      return [getTokenLogoURL({ address: checkSummed, chainId: activeNetwork.chainId }), override]
     }
     return []
-  }, [
-    address,
-    tempSources,
-    activeNetwork.chainId,
-    uriLocationsOptimism,
-    uriLocationsArbitrum,
-    uriLocationsPolygon,
-    uriLocationsCelo,
-    uriLocationsBNB,
-  ])
-
-  if (activeNetwork === OptimismNetworkInfo && address === '0x4200000000000000000000000000000000000006') {
-    return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} {...rest} />
-  }
+  }, [address, tempSources, activeNetwork.chainId])
 
   return <StyledLogo size={size} srcs={srcs} alt={'token logo'} style={style} {...rest} />
 }

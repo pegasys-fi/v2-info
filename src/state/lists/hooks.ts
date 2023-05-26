@@ -1,5 +1,5 @@
 import { UNSUPPORTED_LIST_URLS } from './../../constants/lists'
-import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list'
+import DEFAULT_TOKEN_LIST from '@pollum-io/default-token-list'
 import { Tags, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'

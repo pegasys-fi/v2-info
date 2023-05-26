@@ -9,7 +9,7 @@ import { useClients } from 'state/application/hooks'
 import { useTVLOffset } from './derived'
 
 export const GLOBAL_DATA = (block?: string) => {
-  const queryString = ` query uniswapFactories {
+  const queryString = ` query pegasysFactories {
       factories(
        ${block !== undefined ? `block: { number: ${block}}` : ``} 
        first: 1, subgraphError: allow) {

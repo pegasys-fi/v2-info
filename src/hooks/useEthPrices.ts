@@ -15,32 +15,32 @@ export interface EthPrices {
 export const ETH_PRICES = gql`
   query prices($block24: Int!, $block48: Int!, $blockWeek: Int!) {
     current: bundles(first: 1, subgraphError: allow) {
-      ethPriceUSD
+      sysPriceUSD
     }
     oneDay: bundles(first: 1, block: { number: $block24 }, subgraphError: allow) {
-      ethPriceUSD
+      sysPriceUSD
     }
     twoDay: bundles(first: 1, block: { number: $block48 }, subgraphError: allow) {
-      ethPriceUSD
+      sysPriceUSD
     }
     oneWeek: bundles(first: 1, block: { number: $blockWeek }, subgraphError: allow) {
-      ethPriceUSD
+      sysPriceUSD
     }
   }
 `
 
 interface PricesResponse {
   current: {
-    ethPriceUSD: string
+    sysPriceUSD: string
   }[]
   oneDay: {
-    ethPriceUSD: string
+    sysPriceUSD: string
   }[]
   twoDay: {
-    ethPriceUSD: string
+    sysPriceUSD: string
   }[]
   oneWeek: {
-    ethPriceUSD: string
+    sysPriceUSD: string
   }[]
 }
 
@@ -66,10 +66,10 @@ async function fetchEthPrices(
     } else if (data) {
       return {
         data: {
-          current: parseFloat(data.current[0].ethPriceUSD ?? 0),
-          oneDay: parseFloat(data.oneDay[0]?.ethPriceUSD ?? 0),
-          twoDay: parseFloat(data.twoDay[0]?.ethPriceUSD ?? 0),
-          week: parseFloat(data.oneWeek[0]?.ethPriceUSD ?? 0),
+          current: parseFloat(data.current[0].sysPriceUSD ?? 0),
+          oneDay: parseFloat(data.oneDay[0]?.sysPriceUSD ?? 0),
+          twoDay: parseFloat(data.twoDay[0]?.sysPriceUSD ?? 0),
+          week: parseFloat(data.oneWeek[0]?.sysPriceUSD ?? 0),
         },
         error: false,
       }
