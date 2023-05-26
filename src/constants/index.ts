@@ -10,9 +10,13 @@ const WETH_ADDRESS = '0x4200000000000000000000000000000000000006'
 
 export const WETH_ADDRESSES = [WETH_ADDRESS]
 
-export const TOKEN_HIDE: { [key: string]: string[] } = {}
+export const TOKEN_HIDE: { [key: string]: string[] } = {
+  [SupportedNetwork.ROLLUX]: ['0x0000000000000000000000000000000000000001'],
+}
 
-export const POOL_HIDE: { [key: string]: string[] } = {}
+export const POOL_HIDE: { [key: string]: string[] } = {
+  [SupportedNetwork.ROLLUX]: ['0x0000000000000000000000000000000000000001'],
+}
 
 export const START_BLOCKS: { [key: string]: number } = {
   [SupportedNetwork.ROLLUX]: 215160,
