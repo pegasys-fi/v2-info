@@ -22,7 +22,7 @@ export interface PoolData {
     symbol: string
     address: string
     decimals: number
-    derivedETH: number
+    derivedSYS: number
   }
 
   token1: {
@@ -30,7 +30,7 @@ export interface PoolData {
     symbol: string
     address: string
     decimals: number
-    derivedETH: number
+    derivedSYS: number
   }
 
   // for tick math
@@ -80,12 +80,7 @@ export interface PoolsState {
 
 export const initialState: PoolsState = {
   byAddress: {
-    [SupportedNetwork.ETHEREUM]: {},
-    [SupportedNetwork.ARBITRUM]: {},
-    [SupportedNetwork.OPTIMISM]: {},
-    [SupportedNetwork.POLYGON]: {},
-    [SupportedNetwork.CELO]: {},
-    [SupportedNetwork.BNB]: {},
+    [SupportedNetwork.ROLLUX]: {},
   },
 }
 

@@ -29,14 +29,14 @@ export const POOLS_BULK = (block: number | undefined, pools: string[]) => {
             symbol 
             name
             decimals
-            derivedETH
+            derivedSYS
         }
         token1 {
             id
             symbol 
             name
             decimals
-            derivedETH
+            derivedSYS
         }
         token0Price
         token1Price
@@ -49,7 +49,7 @@ export const POOLS_BULK = (block: number | undefined, pools: string[]) => {
         totalValueLockedUSD
       }
       bundles (where: {id: "1"}) {
-        ethPriceUSD
+        sysPriceUSD
       }
     }
     `
@@ -67,14 +67,14 @@ interface PoolFields {
     symbol: string
     name: string
     decimals: string
-    derivedETH: string
+    derivedSYS: string
   }
   token1: {
     id: string
     symbol: string
     name: string
     decimals: string
-    derivedETH: string
+    derivedSYS: string
   }
   token0Price: string
   token1Price: string
@@ -90,7 +90,7 @@ interface PoolFields {
 interface PoolDataResponse {
   pools: PoolFields[]
   bundles: {
-    ethPriceUSD: string
+    sysPriceUSD: string
   }[]
 }
 
@@ -146,7 +146,7 @@ export function usePoolDatas(
     }
   }
 
-  const ethPriceUSD = data?.bundles?.[0]?.ethPriceUSD ? parseFloat(data?.bundles?.[0]?.ethPriceUSD) : 0
+  const sysPriceUSD = data?.bundles?.[0]?.sysPriceUSD ? parseFloat(data?.bundles?.[0]?.sysPriceUSD) : 0
 
   const parsed = data?.pools
     ? data.pools.reduce((accum: { [address: string]: PoolFields }, poolData) => {
@@ -216,8 +216,8 @@ export function usePoolDatas(
 
     // Part of TVL fix
     const tvlUpdated = current
-      ? tvlToken0 * parseFloat(current.token0.derivedETH) * ethPriceUSD +
-        tvlToken1 * parseFloat(current.token1.derivedETH) * ethPriceUSD
+      ? tvlToken0 * parseFloat(current.token0.derivedSYS) * sysPriceUSD +
+        tvlToken1 * parseFloat(current.token1.derivedSYS) * sysPriceUSD
       : undefined
     if (tvlUpdated) {
       tvlUSD = tvlUpdated
@@ -237,14 +237,14 @@ export function usePoolDatas(
           name: formatTokenName(current.token0.id, current.token0.name, activeNetwork),
           symbol: formatTokenSymbol(current.token0.id, current.token0.symbol, activeNetwork),
           decimals: parseInt(current.token0.decimals),
-          derivedETH: parseFloat(current.token0.derivedETH),
+          derivedSYS: parseFloat(current.token0.derivedSYS),
         },
         token1: {
           address: current.token1.id,
           name: formatTokenName(current.token1.id, current.token1.name, activeNetwork),
           symbol: formatTokenSymbol(current.token1.id, current.token1.symbol, activeNetwork),
           decimals: parseInt(current.token1.decimals),
-          derivedETH: parseFloat(current.token1.derivedETH),
+          derivedSYS: parseFloat(current.token1.derivedSYS),
         },
         token0Price: parseFloat(current.token0Price),
         token1Price: parseFloat(current.token1Price),

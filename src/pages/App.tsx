@@ -16,7 +16,7 @@ import PoolPage from './Pool/PoolPage'
 import { ExternalLink, TYPE } from 'theme'
 import { useActiveNetworkVersion, useSubgraphStatus } from 'state/application/hooks'
 import { DarkGreyCard } from 'components/Card'
-import { SUPPORTED_NETWORK_VERSIONS, EthereumNetworkInfo, OptimismNetworkInfo } from 'constants/networks'
+import { SUPPORTED_NETWORK_VERSIONS, EthereumNetworkInfo } from 'constants/networks'
 import { useIsDarkMode } from 'state/user/hooks'
 
 const AppWrapper = styled.div`
@@ -112,10 +112,7 @@ export default function App() {
   // subgraph health
   const [subgraphStatus] = useSubgraphStatus()
 
-  const showNotSyncedWarning =
-    subgraphStatus.headBlock && subgraphStatus.syncedBlock && activeNetwork === OptimismNetworkInfo
-      ? subgraphStatus.headBlock - subgraphStatus.syncedBlock > BLOCK_DIFFERENCE_THRESHOLD
-      : false
+  const showNotSyncedWarning = false
 
   return (
     <Suspense fallback={null}>
@@ -160,7 +157,7 @@ export default function App() {
                   <TYPE.label>
                     The Graph hosted network which provides data for this site is temporarily experiencing issues. Check
                     current status{' '}
-                    <ExternalLink href="https://thegraph.com/hosted-service/subgraph/uniswap/uniswap-v3">
+                    <ExternalLink href="https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v2">
                       here.
                     </ExternalLink>
                   </TYPE.label>
