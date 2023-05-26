@@ -6,7 +6,6 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 import gql from 'graphql-tag'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { useActiveNetworkVersion, useClients } from 'state/application/hooks'
-import { arbitrumClient, optimismClient } from 'apollo/client'
 import { SupportedNetwork } from 'constants/networks'
 import { useDerivedProtocolTVLHistory } from './derived'
 
@@ -16,8 +15,8 @@ dayjs.extend(weekOfYear)
 const ONE_DAY_UNIX = 24 * 60 * 60
 
 const GLOBAL_CHART = gql`
-  query uniswapDayDatas($startTime: Int!, $skip: Int!) {
-    uniswapDayDatas(
+  query pegasysDayDatas($startTime: Int!, $skip: Int!) {
+    pegasysDayDatas(
       first: 1000
       skip: $skip
       subgraphError: allow
@@ -34,7 +33,7 @@ const GLOBAL_CHART = gql`
 `
 
 interface ChartResults {
-  uniswapDayDatas: {
+  pegasysDayDatas: {
     date: number
     volumeUSD: string
     tvlUSD: string
@@ -47,7 +46,7 @@ async function fetchChartData(client: ApolloClient<NormalizedCacheObject>) {
     volumeUSD: string
     tvlUSD: string
   }[] = []
-  const startTimestamp = client === arbitrumClient ? 1630423606 : client === optimismClient ? 1636697130 : 1619170975
+  const startTimestamp = 1684090544
   const endTimestamp = dayjs.utc().unix()
 
   let error = false
@@ -66,11 +65,11 @@ async function fetchChartData(client: ApolloClient<NormalizedCacheObject>) {
       })
       if (!loading) {
         skip += 1000
-        if (chartResData.uniswapDayDatas.length < 1000 || error) {
+        if (chartResData.pegasysDayDatas.length < 1000 || error) {
           allFound = true
         }
         if (chartResData) {
-          data = data.concat(chartResData.uniswapDayDatas)
+          data = data.concat(chartResData.pegasysDayDatas)
         }
       }
     }
@@ -109,17 +108,6 @@ async function fetchChartData(client: ApolloClient<NormalizedCacheObject>) {
       timestamp = nextDay
     }
 
-    if (client === optimismClient) {
-      formattedExisting[18855] = {
-        ...formattedExisting[18855],
-        tvlUSD: 13480000,
-      }
-      formattedExisting[18856] = {
-        ...formattedExisting[18856],
-        tvlUSD: 13480000,
-      }
-    }
-
     return {
       data: Object.values(formattedExisting),
       error: false,
@@ -146,8 +134,7 @@ export function useFetchGlobalChartData(): {
   const derivedData = useDerivedProtocolTVLHistory()
 
   const [activeNetworkVersion] = useActiveNetworkVersion()
-  const shouldUserDerivedData =
-    activeNetworkVersion.id === SupportedNetwork.ETHEREUM || activeNetworkVersion.id === SupportedNetwork.POLYGON
+  const shouldUserDerivedData = true // TODO: vetify this later
   const indexedData = data?.[activeNetworkVersion.id]
 
   // @TODO: remove this once we have fix for mainnet TVL issue
