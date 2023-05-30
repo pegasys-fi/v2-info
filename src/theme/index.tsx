@@ -90,7 +90,7 @@ export function colors(darkMode: boolean): Colors {
     blue2: '#5199FF',
 
     backgroundPegasys: darkMode ? '#010101' : '#e6faff',
-    background: `radial-gradient(50% 50% at 50% 50%, #56BED8  0%, ${darkMode ? '#010101' : '#e6faff'} 100%)`,
+    background: `radial-gradient(60% 50% at 50% 45%, #56BED8  0%, ${darkMode ? '#010101' : '#e6faff'} 100%)`,
     rainbowPegasysGradient: 'linear-gradient(90deg, #19EBCE 0%, #8A15E6 84.28%)',
     deepShadow: `0px 10px 24px ${opacify(24, '#00D9EF')}, 10px 0px 24px ${opacify(24, '#8C15E8')}`,
     accentAction: darkMode ? '#153D6F' : '#665EE1',
