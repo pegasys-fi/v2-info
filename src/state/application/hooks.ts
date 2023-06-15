@@ -110,6 +110,7 @@ export function useActiveNetworkVersion(): [NetworkInfo, (activeNetworkVersion: 
     },
     [dispatch]
   )
+
   return [activeNetwork, update]
 }
 
