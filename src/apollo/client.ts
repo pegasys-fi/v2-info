@@ -5,12 +5,12 @@ export const healthClient = new ApolloClient({
   cache: new InMemoryCache(),
 })
 // url to testnet : http://13.59.22.26/subgraphs/name/pollum-io/pegasys-v2
-// url to mainnet: https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v2
+// url to mainnet: https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v3
 
 // url to testnet : http://13.59.22.26/subgraphs/name/pollum-io/syscoin-blocks
 // url to mainnet: https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/syscoin-blocks
 export const blockClient = new ApolloClient({
-  uri: 'http://13.59.22.26/subgraphs/name/pollum-io/syscoin-blocks',
+  uri: 'https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/syscoin-blocks',
   cache: new InMemoryCache(),
   queryDeduplication: true,
   defaultOptions: {
@@ -25,7 +25,7 @@ export const blockClient = new ApolloClient({
 })
 
 export const client = new ApolloClient({
-  uri: 'http://13.59.22.26/subgraphs/name/pollum-io/pegasys-v2',
+  uri: 'https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v3',
   cache: new InMemoryCache({
     typePolicies: {
       Token: {
