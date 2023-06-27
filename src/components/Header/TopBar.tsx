@@ -25,7 +25,6 @@ const StyledLink = styled(ExternalLink)`
 
 const TopBar = () => {
   const ethPrices = useEthPrices()
-  const [activeNetwork] = useActiveNetworkVersion()
   return (
     <Wrapper>
       <RowBetween>
@@ -39,9 +38,9 @@ const TopBar = () => {
           </RowFixed>
         </AutoRow>
         <AutoRow gap="6px" style={{ justifyContent: 'flex-end' }}>
-          <StyledLink href="https://info.pegasys.finance/home">V2 Analytics</StyledLink>
-          <StyledLink href="https://docs.pegasys.finance/">Docs</StyledLink>
-          <StyledLink href="https://beta.pegasys.finance/">App</StyledLink>
+          <StyledLink href="https://info.pegasys.fi/">V2 Analytics</StyledLink>
+          <StyledLink href="https://docs.pegasys.fi/">Docs</StyledLink>
+          <StyledLink href="https://app.pegasys.fi/">App</StyledLink>
         </AutoRow>
       </RowBetween>
     </Wrapper>

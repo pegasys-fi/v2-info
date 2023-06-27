@@ -1,4 +1,4 @@
-import ETHEREUM_LOGO_URL from '../assets/images/ethereum-logo.png'
+import ROLLUX_LOGO_URL from '../assets/images/Rollux-1.svg'
 import { SupportedChainId } from '@pollum-io/sdk-core'
 
 export enum SupportedNetwork {
@@ -25,6 +25,6 @@ export const EthereumNetworkInfo: NetworkInfo = {
   bgColor: '#fc077d',
   primaryColor: '#fc077d',
   secondaryColor: '#2172E5',
-  imageURL: ETHEREUM_LOGO_URL,
+  imageURL: ROLLUX_LOGO_URL,
 }
 export const SUPPORTED_NETWORK_VERSIONS: NetworkInfo[] = [EthereumNetworkInfo]
