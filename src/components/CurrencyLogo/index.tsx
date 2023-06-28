@@ -19,7 +19,7 @@ export function chainIdToNetworkName(networkId: SupportedChainId) {
 
 const getTokenLogoURL = ({ address, chainId }: { address: string; chainId: SupportedChainId }) => {
   // return `https://raw.githubusercontent.com/pegays-fi/pegasys-tokenlists/master/${chainId}/${address}/logo.png`
-  return `https://raw.githubusercontent.com/pegasys-fi/pegasys-tokenlists/master/57000/${address}/logo.png`
+  return `https://raw.githubusercontent.com/pegasys-fi/default-token-list/master/src/logos/570/${address}/logo.png`
 }
 
 const StyledLogo = styled(Logo)<{ size: string }>`

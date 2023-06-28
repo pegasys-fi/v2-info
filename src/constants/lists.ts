@@ -3,7 +3,8 @@
 export const UNSUPPORTED_LIST_URLS: string[] = []
 // export const ROLLUX_LIST = 'https://gateway.pinata.cloud/ipfs/QmTD2QoWACBXdJ78R6EwK7qUkGpLw7x6Ffvcq1FSQ2NRYo'
 // TODO: review link to list on rollux
-export const ROLLUX_LIST = 'https://static.luxy.io/ipfs/QmPg3CUHkt8xxuzA3XkFGdSV9wvdnbW4VDkr2RQY6m1WKy'
+export const ROLLUX_LIST =
+  'https://raw.githubusercontent.com/pegasys-fi/default-token-list/main/build/pegasys-default.tokenlist.json'
 // lower index == higher priority for token import
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   ROLLUX_LIST,
