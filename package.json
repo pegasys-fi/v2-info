@@ -35,7 +35,7 @@
     "@uniswap/merkle-distributor": "1.0.1",
     "@uniswap/token-lists": "^1.0.0-beta.27",
     "@pollum-io/pegasys-protocol": "0.0.17",
-    "@pollum-io/v2-sdk": "0.0.2",
+    "@pollum-io/v3-sdk": "0.0.1",
     "@web3-react/core": "^6.0.9",
     "@web3-react/fortmatic-connector": "^6.0.9",
     "@web3-react/injected-connector": "^6.0.7",
@@ -103,7 +103,7 @@
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'",
     "storybook": "start-storybook -p 6006",
     "test": "react-scripts test --env=jsdom",
-    "codegen:schema": "npx apollo client:download-schema --endpoint=https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v2",
+    "codegen:schema": "npx apollo client:download-schema --endpoint=https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v3",
     "codegen:generate": "npx apollo codegen:generate --localSchemaFile=schema.json --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --globalTypesFile=src/types/graphql-global-types.ts types"
   },
   "eslintConfig": {

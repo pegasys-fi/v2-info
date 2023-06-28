@@ -157,7 +157,7 @@ export default function App() {
                   <TYPE.label>
                     The Graph hosted network which provides data for this site is temporarily experiencing issues. Check
                     current status{' '}
-                    <ExternalLink href="https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v2">
+                    <ExternalLink href="https://rollux.graph.pegasys.fi/subgraphs/name/pollum-io/pegasys-v3">
                       here.
                     </ExternalLink>
                   </TYPE.label>

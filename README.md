@@ -1,6 +1,6 @@
 ## Pegasys Info V2
 
-An open sourced interface for Pegasys V2 analytics.
+An open sourced interface for Pegasys V3 analytics.
 
 Info URL: https://info.pegasys.fi/#/
 

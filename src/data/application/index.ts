@@ -49,7 +49,7 @@ export function useFetchedSubgraphStatus(): {
     client: healthClient,
     fetchPolicy: 'network-only',
     variables: {
-      name: 'pollum-io/pegasys-v2',
+      name: 'pollum-io/pegasys-v3',
     },
   })
 
