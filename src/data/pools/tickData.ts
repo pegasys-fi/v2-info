@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import JSBI from 'jsbi'
 import keyBy from 'lodash.keyby'
-import { TickMath, tickToPrice } from '@pollum-io/v2-sdk'
+import { TickMath, tickToPrice } from '@pollum-io/v3-sdk'
 import { Token } from '@pollum-io/sdk-core'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 
