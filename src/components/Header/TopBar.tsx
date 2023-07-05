@@ -5,8 +5,6 @@ import { ExternalLink, TYPE } from 'theme'
 import { useEthPrices } from 'hooks/useEthPrices'
 import { formatDollarAmount } from 'utils/numbers'
 import Polling from './Polling'
-import { useActiveNetworkVersion } from '../../state/application/hooks'
-import { SupportedNetwork } from '../../constants/networks'
 
 const Wrapper = styled.div`
   width: 100%;

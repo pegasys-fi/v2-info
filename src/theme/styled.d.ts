@@ -17,6 +17,7 @@ export interface Colors {
   bg0: Color
   bg0opacify: Color
   bg0opacifyLight: Color
+  bg0opacifyLight2: Color
   bg1: Color
   bg2: Color
   bg2opacify: Color
