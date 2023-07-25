@@ -2,10 +2,7 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { isAddress } from 'utils'
 import Logo from '../Logo'
-import { useCombinedActiveList } from 'state/lists/hooks'
-import useHttpLocations from 'hooks/useHttpLocations'
 import { useActiveNetworkVersion } from 'state/application/hooks'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import { SupportedChainId } from '@pollum-io/sdk-core'
 
 export function chainIdToNetworkName(networkId: SupportedChainId) {
@@ -17,8 +14,7 @@ export function chainIdToNetworkName(networkId: SupportedChainId) {
   }
 }
 
-const getTokenLogoURL = ({ address, chainId }: { address: string; chainId: SupportedChainId }) => {
-  // return `https://raw.githubusercontent.com/pegays-fi/pegasys-tokenlists/master/${chainId}/${address}/logo.png`
+const getTokenLogoURL = ({ address }: { address: string; chainId: SupportedChainId }) => {
   return `https://raw.githubusercontent.com/pegasys-fi/default-token-list/master/src/logos/570/${address}/logo.png`
 }
 
@@ -31,12 +27,12 @@ const StyledLogo = styled(Logo)<{ size: string }>`
   color: ${({ theme }) => theme.text4};
 `
 
-const StyledEthereumLogo = styled.img<{ size: string }>`
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
-  border-radius: 24px;
-`
+// const StyledEthereumLogo = styled.img<{ size: string }>`
+//   width: ${({ size }) => size};
+//   height: ${({ size }) => size};
+//   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
+//   border-radius: 24px;
+// `
 
 export default function CurrencyLogo({
   address,
@@ -50,7 +46,7 @@ export default function CurrencyLogo({
 }) {
   const [activeNetwork] = useActiveNetworkVersion()
 
-  const checkSummed = isAddress(address)
+  // const checkSummed = isAddress(address)
 
   //temp until token logo issue merged
   const tempSources: { [address: string]: string } = useMemo(() => {

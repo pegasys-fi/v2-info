@@ -133,7 +133,6 @@ const DataRow = ({ transaction }: { transaction: Transaction }) => {
 export default function TransactionTable({
   transactions,
   maxItems = 10,
-  color,
 }: {
   transactions: Transaction[]
   maxItems?: number

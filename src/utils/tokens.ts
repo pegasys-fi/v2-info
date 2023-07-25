@@ -1,5 +1,4 @@
 import { Token } from '@pollum-io/sdk-core'
-import { NetworkInfo } from 'constants/networks'
 import { WETH_ADDRESSES } from '../constants'
 
 export interface SerializedToken {
@@ -20,14 +19,14 @@ export function serializeToken(token: Token): SerializedToken {
   }
 }
 
-export function formatTokenSymbol(address: string, symbol: string, activeNetwork?: NetworkInfo) {
+export function formatTokenSymbol(address: string, symbol: string) {
   if (WETH_ADDRESSES.includes(address)) {
     return 'SYS'
   }
   return symbol
 }
 
-export function formatTokenName(address: string, name: string, activeNetwork?: NetworkInfo) {
+export function formatTokenName(address: string, name: string) {
   // dumb catch for matic
 
   if (WETH_ADDRESSES.includes(address)) {

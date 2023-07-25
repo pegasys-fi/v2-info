@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemedBackground, PageWrapper } from 'pages/styled'
 import { feeTierPercent, getEtherscanLink } from 'utils'
@@ -28,6 +27,7 @@ import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
 import { EthereumNetworkInfo } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
+import { useParams } from 'react-router-dom'
 
 const ContentLayout = styled.div`
   display: grid;
@@ -71,11 +71,7 @@ enum ChartView {
   FEES,
 }
 
-export default function PoolPage({
-  match: {
-    params: { address },
-  },
-}: RouteComponentProps<{ address: string }>) {
+export default function PoolPage() {
   const [activeNetwork] = useActiveNetworkVersion()
 
   useEffect(() => {
@@ -85,11 +81,12 @@ export default function PoolPage({
   // theming
   const theme = useTheme()
   const backgroundColor = theme.primary1
-
+  const { address } = useParams()
+  const localAddress = address ?? ''
   // token data
-  const poolData = usePoolDatas([address])[0]
-  const chartData = usePoolChartData(address)
-  const transactions = usePoolTransactions(address)
+  const poolData = usePoolDatas([localAddress])[0]
+  const chartData = usePoolChartData(localAddress)
+  const transactions = usePoolTransactions(localAddress)
 
   const [view, setView] = useState(ChartView.VOL)
   const [latestValue, setLatestValue] = useState<number | undefined>()
@@ -156,8 +153,8 @@ export default function PoolPage({
               )} `}</TYPE.label>
             </AutoRow>
             <RowFixed gap="10px" align="center">
-              <SavedIcon fill={savedPools.includes(address)} onClick={() => addSavedPool(address)} />
-              <StyledExternalLink href={getEtherscanLink(1, address, 'address', activeNetwork)}>
+              <SavedIcon fill={savedPools.includes(localAddress)} onClick={() => addSavedPool(localAddress)} />
+              <StyledExternalLink href={getEtherscanLink(1, localAddress, 'address', activeNetwork)}>
                 <ExternalLink stroke={theme.primary1} size={'17px'} style={{ marginLeft: '12px' }} />
               </StyledExternalLink>
             </RowFixed>
@@ -332,7 +329,7 @@ export default function PoolPage({
                   label={valueLabel}
                 />
               ) : (
-                <DensityChart address={address} />
+                <DensityChart address={localAddress} />
               )}
             </DarkGreyCardOpacity>
           </ContentLayout>

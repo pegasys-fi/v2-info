@@ -63,7 +63,7 @@ const HeaderLinks = styled(Row)`
   @media (max-width: 1080px) {
     padding: 0.5rem;
     justify-content: flex-end;
-  } ;
+  }
 `
 
 const Title = styled(NavLink)`
@@ -168,11 +168,7 @@ export default function Header() {
           </UniIcon>
         </Title>
         <HeaderLinks>
-          <StyledNavLink
-            id={`pool-nav-link`}
-            to={networkPrefix(activeNewtork)}
-            isActive={(match, { pathname }) => pathname === '/'}
-          >
+          <StyledNavLink id={`pool-nav-link`} to={networkPrefix(activeNewtork)}>
             Overview
           </StyledNavLink>
           <StyledNavLink id={`stake-nav-link`} to={networkPrefix(activeNewtork) + 'pools'}>

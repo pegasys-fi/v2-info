@@ -12,7 +12,7 @@ import { GreyBadge } from 'components/Card'
 import { feeTierPercent } from 'utils'
 import { useSavedTokens, useSavedPools } from 'state/user/hooks'
 import { SavedIcon } from 'components/Button'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTokenDatas } from 'state/tokens/hooks'
 import { usePoolDatas } from 'state/pools/hooks'
 import HoverInlineText from 'components/HoverInlineText'
@@ -37,7 +37,7 @@ const Wrapper = styled(Row)`
 
   @media (max-width: 1080px) {
     width: 100%;
-  } ;
+  }
 `
 
 const StyledInput = styled.input`
@@ -153,7 +153,7 @@ const OptionButton = styled.div<{ enabled: boolean }>`
 `
 
 const Search = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
-  const history = useHistory()
+  const history = useNavigate()
   const [activeNetwork] = useActiveNetworkVersion()
 
   const ref = useRef<HTMLInputElement>(null)
@@ -206,7 +206,7 @@ const Search = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
     setShowMenu(false)
     setPoolsShown(3)
     setTokensShown(3)
-    history.push(to)
+    history(to)
   }
 
   // get date for watchlist

@@ -118,7 +118,7 @@ const WALLET_VIEWS = {
 
 export default function WalletModal({ ENSName }: { ENSName?: string }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  const { isActive, account, connector, isActivating, error } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -147,13 +147,16 @@ export default function WalletModal({ ENSName }: { ENSName?: string }) {
   }, [walletModalOpen])
 
   // close modal when a connection is successful
-  const activePrevious = usePrevious(active)
+  const activePrevious = usePrevious(isActive)
   const connectorPrevious = usePrevious(connector)
   useEffect(() => {
-    if (walletModalOpen && ((active && !activePrevious) || (connector && connector !== connectorPrevious && !error))) {
+    if (
+      walletModalOpen &&
+      ((isActive && !activePrevious) || (connector && connector !== connectorPrevious && !error))
+    ) {
       setWalletView(WALLET_VIEWS.ACCOUNT)
     }
-  }, [setWalletView, active, error, connector, walletModalOpen, activePrevious, connectorPrevious])
+  }, [setWalletView, isActive, error, connector, walletModalOpen, activePrevious, connectorPrevious])
 
   const tryActivation = async (connector: AbstractConnector | undefined) => {
     let name = ''

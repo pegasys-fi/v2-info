@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   useTokenData,
   usePoolsForToken,
@@ -23,7 +23,7 @@ import CurrencyLogo from 'components/CurrencyLogo'
 import { formatDollarAmount } from 'utils/numbers'
 import Percent from 'components/Percent'
 import { ButtonPrimary, ButtonGray, SavedIcon } from 'components/Button'
-import { DarkGreyCard, DarkGreyCardOpacity, LightGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity, LightGreyCard } from 'components/Card'
 import { usePoolDatas } from 'state/pools/hooks'
 import PoolTable from 'components/pools/PoolTable'
 import LineChart from 'components/LineChart/alt'
@@ -85,14 +85,10 @@ enum ChartView {
 
 const DEFAULT_TIME_WINDOW = TimeWindow.WEEK
 
-export default function TokenPage({
-  match: {
-    params: { address },
-  },
-}: RouteComponentProps<{ address: string }>) {
+export default function TokenPage() {
   const [activeNetwork] = useActiveNetworkVersion()
-
-  address = address.toLowerCase()
+  const { address } = useParams()
+  const localAddress = address?.toLowerCase() ?? ''
   // theming
   const backgroundColor = useColor(address)
   const theme = useTheme()
@@ -102,14 +98,14 @@ export default function TokenPage({
     window.scrollTo(0, 0)
   }, [])
 
-  const tokenData = useTokenData(address)
-  const poolsForToken = usePoolsForToken(address)
+  const tokenData = useTokenData(localAddress)
+  const poolsForToken = usePoolsForToken(localAddress)
   const poolDatas = usePoolDatas(poolsForToken ?? [])
-  const transactions = useTokenTransactions(address)
-  const chartData = useTokenChartData(address)
+  const transactions = useTokenTransactions(localAddress)
+  const chartData = useTokenChartData(localAddress)
 
   // check for link to CMC
-  const cmcLink = useCMCLink(address)
+  const cmcLink = useCMCLink(localAddress)
 
   // format for chart component
   const formattedTvlData = useMemo(() => {
@@ -145,7 +141,7 @@ export default function TokenPage({
   const [timeWindow] = useState(DEFAULT_TIME_WINDOW)
 
   // pricing data
-  const priceData = useTokenPriceData(address, ONE_HOUR_SECONDS, timeWindow)
+  const priceData = useTokenPriceData(localAddress, ONE_HOUR_SECONDS, timeWindow)
   const adjustedToCurrent = useMemo(() => {
     if (priceData && tokenData && priceData.length > 0) {
       const adjusted = Object.assign([], priceData)
@@ -189,12 +185,12 @@ export default function TokenPage({
                   </StyledInternalLink>
                   <TYPE.main>{` > `}</TYPE.main>
                   <TYPE.label>{` ${tokenData.symbol} `}</TYPE.label>
-                  <StyledExternalLink href={getEtherscanLink(1, address, 'address', activeNetwork)}>
-                    <TYPE.main>{` (${shortenAddress(address)}) `}</TYPE.main>
+                  <StyledExternalLink href={getEtherscanLink(1, localAddress, 'address', activeNetwork)}>
+                    <TYPE.main>{` (${shortenAddress(localAddress)}) `}</TYPE.main>
                   </StyledExternalLink>
                 </AutoRow>
                 <RowFixed align="center" justify="center">
-                  <SavedIcon fill={savedTokens.includes(address)} onClick={() => addSavedToken(address)} />
+                  <SavedIcon fill={savedTokens.includes(localAddress)} onClick={() => addSavedToken(localAddress)} />
                   {cmcLink && (
                     <StyledExternalLink
                       href={cmcLink}
@@ -209,7 +205,7 @@ export default function TokenPage({
                       <StyledCMCLogo src={CMCLogo} />
                     </StyledExternalLink>
                   )}
-                  <StyledExternalLink href={getEtherscanLink(1, address, 'address', activeNetwork)}>
+                  <StyledExternalLink href={getEtherscanLink(1, localAddress, 'address', activeNetwork)}>
                     <ExternalLink stroke={theme.text2} size={'17px'} style={{ marginLeft: '12px' }} />
                   </StyledExternalLink>
                 </RowFixed>
