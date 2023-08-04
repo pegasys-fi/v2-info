@@ -11,8 +11,7 @@ import { ExternalLink, Download } from 'react-feather'
 import { ExternalLink as StyledExternalLink } from '../../theme/components'
 import useTheme from 'hooks/useTheme'
 import CurrencyLogo from 'components/CurrencyLogo'
-import { formatDollarAmount, formatAmount } from 'utils/numbers'
-import Percent from 'components/Percent'
+import { formatDollarAmount, formatAmount, formatPercentAmount } from 'utils/numbers'
 import { ButtonPrimary, ButtonGray, SavedIcon } from 'components/Button'
 import { GreyCard, GreyBadge, DarkGreyCardOpacity, GreyCardOpacity } from 'components/Card'
 import { usePoolDatas, usePoolChartData, usePoolTransactions } from 'state/pools/hooks'
@@ -28,6 +27,8 @@ import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
 import { EthereumNetworkInfo } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
+import LineChart from 'components/LineChart/alt'
+import Percent from 'components/Percent'
 
 const ContentLayout = styled.div`
   display: grid;
@@ -69,6 +70,7 @@ enum ChartView {
   PRICE,
   DENSITY,
   FEES,
+  ROL,
 }
 
 export default function PoolPage({
@@ -114,6 +116,19 @@ export default function PoolPage({
         return {
           time: unixToDate(day.date),
           value: day.volumeUSD,
+        }
+      })
+    } else {
+      return []
+    }
+  }, [chartData])
+
+  const formattedReturnOnLiqData = useMemo(() => {
+    if (chartData) {
+      return chartData.map((day) => {
+        return {
+          time: unixToDate(day.date),
+          value: day.feesUSD / day.totalValueLockedUSD,
         }
       })
     } else {
@@ -275,9 +290,13 @@ export default function PoolPage({
                   <TYPE.label fontSize="24px" height="30px">
                     <MonoSpace>
                       {latestValue
-                        ? formatDollarAmount(latestValue)
+                        ? view === ChartView.ROL
+                          ? formatPercentAmount(latestValue)
+                          : formatDollarAmount(latestValue)
                         : view === ChartView.VOL
                         ? formatDollarAmount(formattedVolumeData[formattedVolumeData.length - 1]?.value)
+                        : view === ChartView.ROL
+                        ? formatPercentAmount(formattedReturnOnLiqData[formattedReturnOnLiqData.length - 1]?.value)
                         : view === ChartView.DENSITY
                         ? ''
                         : formatDollarAmount(formattedTvlData[formattedTvlData.length - 1]?.value)}{' '}
@@ -287,7 +306,7 @@ export default function PoolPage({
                     {valueLabel ? <MonoSpace>{valueLabel} (UTC)</MonoSpace> : ''}
                   </TYPE.main>
                 </AutoColumn>
-                <ToggleWrapper width="240px">
+                <ToggleWrapper width="250px">
                   <ToggleElementFree
                     isActive={view === ChartView.VOL}
                     fontSize="12px"
@@ -298,9 +317,16 @@ export default function PoolPage({
                   <ToggleElementFree
                     isActive={view === ChartView.DENSITY}
                     fontSize="12px"
-                    onClick={() => (view === ChartView.DENSITY ? setView(ChartView.VOL) : setView(ChartView.DENSITY))}
+                    onClick={() => (view === ChartView.DENSITY ? setView(ChartView.ROL) : setView(ChartView.DENSITY))}
                   >
                     Liquidity
+                  </ToggleElementFree>
+                  <ToggleElementFree
+                    isActive={view === ChartView.ROL}
+                    fontSize="12px"
+                    onClick={() => (view === ChartView.ROL ? setView(ChartView.DENSITY) : setView(ChartView.ROL))}
+                  >
+                    ROI
                   </ToggleElementFree>
                   <ToggleElementFree
                     isActive={view === ChartView.FEES}
@@ -324,6 +350,16 @@ export default function PoolPage({
               ) : view === ChartView.FEES ? (
                 <BarChart
                   data={formattedFeesUSD}
+                  color={backgroundColor}
+                  minHeight={340}
+                  setValue={setLatestValue}
+                  setLabel={setValueLabel}
+                  value={latestValue}
+                  label={valueLabel}
+                />
+              ) : view === ChartView.ROL ? (
+                <LineChart
+                  data={formattedReturnOnLiqData}
                   color={backgroundColor}
                   minHeight={340}
                   setValue={setLatestValue}

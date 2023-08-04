@@ -8,7 +8,6 @@ import {
   useTokenTransactions,
 } from 'state/tokens/hooks'
 import styled from 'styled-components'
-import { useColor } from 'hooks/useColor'
 import ReactGA from 'react-ga'
 import { ThemedBackground, PageWrapper } from 'pages/styled'
 import { shortenAddress, getEtherscanLink, currentTimestamp } from 'utils'
@@ -23,7 +22,7 @@ import CurrencyLogo from 'components/CurrencyLogo'
 import { formatDollarAmount } from 'utils/numbers'
 import Percent from 'components/Percent'
 import { ButtonPrimary, ButtonGray, SavedIcon } from 'components/Button'
-import { DarkGreyCard, DarkGreyCardOpacity, LightGreyCard } from 'components/Card'
+import { DarkGreyCardOpacity, LightGreyCard } from 'components/Card'
 import { usePoolDatas } from 'state/pools/hooks'
 import PoolTable from 'components/pools/PoolTable'
 import LineChart from 'components/LineChart/alt'
@@ -40,7 +39,6 @@ import { useActiveNetworkVersion } from 'state/application/hooks'
 import { networkPrefix } from 'utils/networkPrefix'
 import { EthereumNetworkInfo } from 'constants/networks'
 import { GenericImageWrapper } from 'components/Logo'
-// import { SmallOptionButton } from '../../components/Button'
 import { useCMCLink } from 'hooks/useCMCLink'
 import CMCLogo from '../../assets/images/cmc.png'
 
@@ -94,8 +92,8 @@ export default function TokenPage({
 
   address = address.toLowerCase()
   // theming
-  const backgroundColor = useColor(address)
   const theme = useTheme()
+  const backgroundColor = theme.primary1
 
   // scroll on page view
   useEffect(() => {
@@ -326,7 +324,7 @@ export default function TokenPage({
                 {view === ChartView.TVL ? (
                   <LineChart
                     data={formattedTvlData}
-                    color={'transparent'}
+                    color={backgroundColor}
                     minHeight={340}
                     value={latestValue}
                     label={valueLabel}
@@ -336,7 +334,7 @@ export default function TokenPage({
                 ) : view === ChartView.VOL ? (
                   <BarChart
                     data={formattedVolumeData}
-                    color={'transparent'}
+                    color={backgroundColor}
                     minHeight={340}
                     value={latestValue}
                     label={valueLabel}
@@ -349,41 +347,12 @@ export default function TokenPage({
                       data={adjustedToCurrent}
                       setValue={setLatestValue}
                       setLabel={setValueLabel}
-                      color={'transparent'}
+                      color={backgroundColor}
                     />
                   ) : (
                     <LocalLoader fill={false} />
                   )
                 ) : null}
-                {/* <RowBetween width="100%">
-                  <div> </div>
-                  <AutoRow gap="4px" width="fit-content">
-                    <SmallOptionButton
-                      active={timeWindow === TimeWindow.DAY}
-                      onClick={() => setTimeWindow(TimeWindow.DAY)}
-                    >
-                      24H
-                    </SmallOptionButton>
-                    <SmallOptionButton
-                      active={timeWindow === TimeWindow.WEEK}
-                      onClick={() => setTimeWindow(TimeWindow.WEEK)}
-                    >
-                      1W
-                    </SmallOptionButton>
-                    <SmallOptionButton
-                      active={timeWindow === TimeWindow.MONTH}
-                      onClick={() => setTimeWindow(TimeWindow.MONTH)}
-                    >
-                      1M
-                    </SmallOptionButton>
-                    <SmallOptionButton
-                      active={timeWindow === TimeWindow.DAY}
-                      onClick={() => setTimeWindow(TimeWindow.DAY)}
-                    >
-                      All
-                    </SmallOptionButton>
-                  </AutoRow>
-                </RowBetween> */}
               </DarkGreyCardOpacity>
             </ContentLayout>
             <TYPE.main>Pools</TYPE.main>
