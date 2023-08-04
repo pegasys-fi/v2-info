@@ -47,6 +47,7 @@ export const POOLS_BULK = (block: number | undefined, pools: string[]) => {
         totalValueLockedToken0
         totalValueLockedToken1
         totalValueLockedUSD
+        feesUSD
       }
       bundles (where: {id: "1"}) {
         sysPriceUSD
@@ -85,6 +86,7 @@ interface PoolFields {
   totalValueLockedToken0: string
   totalValueLockedToken1: string
   totalValueLockedUSD: string
+  feesUSD: string
 }
 
 interface PoolDataResponse {
@@ -187,6 +189,13 @@ export function usePoolDatas(
         ? [parseFloat(current.volumeUSD), 0]
         : [0, 0]
 
+    const [feesUSD, feesUSDChange] =
+      current && oneDay && twoDay
+        ? get2DayChange(current.feesUSD, oneDay.feesUSD, twoDay.feesUSD)
+        : current
+        ? [parseFloat(current.feesUSD), 0]
+        : [0, 0]
+
     const volumeUSDWeek =
       current && week
         ? parseFloat(current.volumeUSD) - parseFloat(week.volumeUSD)
@@ -255,6 +264,8 @@ export function usePoolDatas(
         tvlUSDChange,
         tvlToken0,
         tvlToken1,
+        feesUSD,
+        feesUSDChange,
       }
     }
 
