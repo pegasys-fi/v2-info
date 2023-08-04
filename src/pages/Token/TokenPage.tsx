@@ -8,7 +8,6 @@ import {
   useTokenTransactions,
 } from 'state/tokens/hooks'
 import styled from 'styled-components'
-import { useColor } from 'hooks/useColor'
 import ReactGA from 'react-ga'
 import { ThemedBackground, PageWrapper } from 'pages/styled'
 import { shortenAddress, getEtherscanLink, currentTimestamp } from 'utils'
