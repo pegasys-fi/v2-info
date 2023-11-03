@@ -285,7 +285,7 @@ export default function TokenPage({
                             ? formatDollarAmount(formattedVolumeData[formattedVolumeData.length - 1]?.value)
                             : view === ChartView.TVL
                             ? formatDollarAmount(formattedTvlData[formattedTvlData.length - 1]?.value)
-                            : formatDollarAmount(tokenData.priceUSD, 2)}
+                            : formatDollarAmount(tokenData.priceUSD, 4)}
                         </MonoSpace>
                       </TYPE.label>
                     </RowFixed>
